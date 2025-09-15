@@ -11,140 +11,336 @@
   .plan-card { transition: all 0.3s ease; cursor: pointer; }
   .plan-card:hover { transform: scale(1.03); }
   .hidden { display: none; }
+
+  /* ===== Pro Info Card Styling (integrated from your other design) ===== */
+  :root{
+    --line: rgba(255,255,255,.08);
+    --muted: #a7afc3;
+  }
+  .info-wrap{ display:grid; gap:28px; max-width:1100px; margin:0 auto; }
+  .info-head{
+    display:flex; align-items:center; gap:10px;
+    font-weight:800; letter-spacing:.3px;
+    font-size:clamp(1.1rem, .95rem + .6vw, 1.4rem);
+  }
+  .info-head::after{
+    content:""; flex:1; height:1px;
+    background:linear-gradient(90deg, var(--line), transparent);
+  }
+  .feature-grid{
+    display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px;
+  }
+  @media (max-width: 800px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:16px; border:1px solid var(--line);
+    border-radius:14px;
+    background:linear-gradient(180deg, #1a1a2a, #121226);
+    box-shadow:0 6px 22px rgba(0,0,0,.25);
+  }
+  .feature .ico{
+    width:40px; height:40px; border-radius:10px; flex:0 0 auto;
+    display:grid; place-items:center;
+    background:linear-gradient(135deg, rgba(143,99,255,.18), rgba(240,204,109,.12));
+    border:1px solid var(--line);
+  }
+  .feature h4{ margin:0 0 2px; font-size:1rem; font-weight:800; letter-spacing:.2px; }
+  .feature p{ margin:0; font-size:.95rem; color:var(--muted); line-height:1.35; }
+  .info-card{
+    border:1px solid var(--line); border-radius:14px;
+    background:linear-gradient(180deg, #1a1a2a, #121226);
+    padding:16px; box-shadow:0 6px 22px rgba(0,0,0,.25);
+  }
+  .info-list{ display:grid; gap:10px; margin:0; }
+  .info-row{ display:flex; gap:10px; align-items:flex-start; }
+  .info-row .dot{
+    width:9px; height:9px; margin-top:6px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #fff, #cfc7ff 60%, #8f63ff);
+    flex:0 0 auto;
+  }
+  .info-row .label{ color:var(--muted); font-size:.92rem; }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
+  .btn-solid{
+    display:inline-flex; gap:10px; align-items:center;
+    padding:12px 16px; border-radius:12px;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg, #1e233f, #181c36);
+    color:#e9ebf0; text-decoration:none; font-weight:800;
+    box-shadow:0 8px 26px rgba(143,99,255,.18);
+    transition:transform .08s ease, box-shadow .15s ease;
+  }
+  .btn-solid:hover{ transform:translateY(-1px); box-shadow:0 12px 34px rgba(143,99,255,.26); }
+  .btn-ghost{
+    display:inline-flex; gap:10px; align-items:center;
+    padding:12px 16px; border-radius:12px;
+    border:1px dashed rgba(255,255,255,.18);
+    color:#cfd3e3; text-decoration:none; font-weight:800;
+  }
 </style>
 </head>
 <body class="font-sans">
- <!-- Logo with manual positioning -->
-  <img src="images/weblogo.jpg" alt="Logo" 
-       class="absolute" 
+  <!-- Logo with manual positioning -->
+  <img src="images/weblogo.jpg" alt="Logo"
+       class="absolute"
        style="top: 35px; left: 30px; height: 80px; width: auto;">
 
-<!-- Hero -->
-<section class="text-center py-12">
-  <h1 class="text-4xl font-bold mb-4">We Build Custom Websites</h1>
-  <p class="text-gray-300">Modern, responsive, and tailored to your needs</p>
-</section>
+  <!-- Hero -->
+  <section class="text-center py-12">
+    <h1 class="text-4xl font-bold mb-4">We Build Custom Websites</h1>
+    <p class="text-gray-300">Modern, responsive, and tailored to your needs</p>
+  </section>
 
-<!-- Live Example -->
-<section class="p-6">
-  <h2 class="text-2xl font-bold mb-4">Customer Satisfaction Example</h2>
-  <iframe src="https://voices.band/" class="w-full h-[750px] rounded border border-gray-700"></iframe>
-</section>
+  <!-- ===== New Professional Sections (added ABOVE your existing content) ===== -->
+  <main class="info-wrap px-6">
+    <!-- Services / What You Get -->
+    <h3 class="info-head">What You Get</h3>
+    <div class="feature-grid">
+      <article class="feature">
+        <div class="ico" aria-hidden="true">
+          <!-- Design -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="3" width="8" height="8" rx="2" stroke="#f0cc6d" stroke-width="2"/>
+            <rect x="13" y="3" width="8" height="8" rx="2" stroke="#cfc7ff" stroke-width="2"/>
+            <rect x="3" y="13" width="18" height="8" rx="2" stroke="#cfc7ff" stroke-width="2"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Custom Design & UX</h4>
+          <p>Clean, modern layouts built around your brand. Mobile-first, accessible, and fast.</p>
+        </div>
+      </article>
 
-<!-- Pricing Plans -->
-<section class="p-6">
-  <h2 class="text-2xl font-bold mb-4">Plans & Pricing</h2>
-  <div id="plans" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <article class="feature">
+        <div class="ico" aria-hidden="true">
+          <!-- Speed/SEO -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3a9 9 0 109 9" stroke="#cfc7ff" stroke-width="2"/>
+            <path d="M12 12l6-3" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Performance & SEO</h4>
+          <p>Optimized assets, Lighthouse-friendly markup, and on-page SEO best practices.</p>
+        </div>
+      </article>
 
-    <!-- No Hosting -->
-    <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-      <h3 class="text-lg font-bold">No Hosting</h3>
-      <p class="text-2xl text-[#00BFA6] font-bold">$299</p>
-      <p class="text-gray-400">We deliver files, you host anywhere.</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-        <li>Custom Design</li>
-        <li>Files Provided</li>
-        <li>Fast Delivery</li>
-      </ul>
-      <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+      <article class="feature">
+        <div class="ico" aria-hidden="true">
+          <!-- Hosting/SSL -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 5h16v6H4zM4 13h16v6H4z" stroke="#cfc7ff" stroke-width="2"/>
+            <path d="M8 8h4M8 16h4" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Hosting & SSL (optional)</h4>
+          <p>We can host it for you with HTTPS and monitoring—or hand off files to your provider.</p>
+        </div>
+      </article>
+
+      <article class="feature">
+        <div class="ico" aria-hidden="true">
+          <!-- Admin -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="8" cy="8" r="3" stroke="#cfc7ff" stroke-width="2"/>
+            <path d="M3 21a5 5 0 0110 0" stroke="#cfc7ff" stroke-width="2"/>
+            <path d="M15 9h6M18 6v6" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h4>Admin & Integrations</h4>
+          <p>From simple static sites to live admin dashboards, Sheets/App Script, email, and more.</p>
+        </div>
+      </article>
     </div>
 
-    <!-- Static Config -->
-    <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-      <h3 class="text-lg font-bold">Static Config</h3>
-      <p class="text-2xl text-[#00BFA6] font-bold">$349</p>
-      <p class="text-gray-400">Fixed content, no admin panel.</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-        <li>Custom Design</li>
-        <li>Fast Loading</li>
-        <li>No Backend Editing</li>
-      </ul>
-      <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+    <!-- How We Work -->
+    <h3 class="info-head">How We Work</h3>
+    <div class="info-card">
+      <div class="info-list">
+        <div class="info-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <strong>Quick Discovery</strong>
+            <div class="label">We gather goals, content, and references to nail your look and structure.</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <strong>Design & Build</strong>
+            <div class="label">We ship a first pass fast, then refine with your feedback.</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div>
+            <strong>Launch & Support</strong>
+            <div class="label">We deploy (or hand off), verify speed/SEO, and stand by for tweaks.</div>
+          </div>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn-solid" href="#orderSection">
+          <!-- Arrow -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="#cfc7ff" stroke-width="1.8" stroke-linecap="round"/></svg>
+          Start Your Project
+        </a>
+        <a class="btn-ghost" href="mailto:contact@yourdomain.com">Email Questions</a>
+      </div>
     </div>
 
-    <!-- Hosting Included -->
-    <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-      <h3 class="text-lg font-bold">Hosting Included</h3>
-      <p class="text-2xl text-[#00BFA6] font-bold">$399</p>
-      <p class="text-gray-400">Full website + managed hosting.</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-        <li>Custom Design</li>
-        <li>Free SSL</li>
-        <li>1 Year Hosting</li>
-      </ul>
-      <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+    <!-- Availability & Contact -->
+    <h3 class="info-head">Availability & Contact</h3>
+    <div class="info-card">
+      <div class="info-list">
+        <div class="info-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>Mon–Sat</strong> · 9:00–6:00</div>
+        </div>
+        <div class="info-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>Sun</strong> · by appointment</div>
+        </div>
+        <div class="info-row">
+          <span class="dot" aria-hidden="true"></span>
+          <div><strong>Fastest reply:</strong> call or text
+            <a href="tel:+15739153370" class="underline decoration-dashed decoration-gray-400">+1 (573) 915-3370</a>
+          </div>
+        </div>
+      </div>
+      <div class="cta-row">
+        <a class="btn-solid" href="tel:+15739153370">
+          <!-- Phone icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5c4 8 8 12 16 16l2-4-5-3-3 2c-2-1-4-3-6-6l2-3-3-5-3 3z" stroke="#cfc7ff" stroke-width="1.6"/></svg>
+          Call Now
+        </a>
+        <a class="btn-ghost" href="sms:+15739153370">Text Us</a>
+      </div>
+    </div>
+  </main>
+  <!-- ===== End New Sections ===== -->
+
+  <!-- Live Example -->
+  <section class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Customer Satisfaction Example</h2>
+    <!-- Note: some sites block iframes with X-Frame-Options -->
+    <iframe src="https://voices.band/" class="w-full h-[750px] rounded border border-gray-700"></iframe>
+  </section>
+
+  <!-- Pricing Plans -->
+  <section class="p-6">
+    <h2 class="text-2xl font-bold mb-4">Plans & Pricing</h2>
+    <div id="plans" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+
+      <!-- No Hosting -->
+      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
+        <h3 class="text-lg font-bold">No Hosting</h3>
+        <p class="text-2xl text-[#00BFA6] font-bold">$299</p>
+        <p class="text-gray-400">We deliver files, you host anywhere.</p>
+        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
+          <li>Custom Design</li>
+          <li>Files Provided</li>
+          <li>Fast Delivery</li>
+        </ul>
+        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+      </div>
+
+      <!-- Static Config -->
+      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
+        <h3 class="text-lg font-bold">Static Config</h3>
+        <p class="text-2xl text-[#00BFA6] font-bold">$349</p>
+        <p class="text-gray-400">Fixed content, no admin panel.</p>
+        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
+          <li>Custom Design</li>
+          <li>Fast Loading</li>
+          <li>No Backend Editing</li>
+        </ul>
+        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+      </div>
+
+      <!-- Hosting Included -->
+      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
+        <h3 class="text-lg font-bold">Hosting Included</h3>
+        <p class="text-2xl text-[#00BFA6] font-bold">$399</p>
+        <p class="text-gray-400">Full website + managed hosting.</p>
+        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
+          <li>Custom Design</li>
+          <li>Free SSL</li>
+          <li>1 Year Hosting</li>
+        </ul>
+        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+      </div>
+
+      <!-- Fully Dynamic -->
+      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
+        <h3 class="text-lg font-bold">Fully Dynamic</h3>
+        <p class="text-2xl text-[#00BFA6] font-bold">$499</p>
+        <p class="text-gray-400">Admin page to edit content live.</p>
+        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
+          <li>Custom Design</li>
+          <li>Hosting</li>
+          <li>Admin Page For Editing</li>
+          <li>Full Support</li>
+          <li>Three Additions After Completion</li>
+        </ul>
+        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
+      </div>
+
     </div>
 
-    <!-- Fully Dynamic -->
-    <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-      <h3 class="text-lg font-bold">Fully Dynamic</h3>
-      <p class="text-2xl text-[#00BFA6] font-bold">$499</p>
-      <p class="text-gray-400">Admin page to edit content live.</p>
-      <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-        <li>Custom Design</li>
-        <li>Hosting</li>
-        <li>Admin Page For Editing</li>
-        <li>Full Support</li>
-        <li>Three Additions After Completion</li>
-      </ul>
-      <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
-    </div>
+    <p class="text-sm text-gray-500 mt-4 font-bold italic">
+      *All plans exclude domain name purchase. Customers must purchase their own domain. Unless default is selected.*
+    </p>
+  </section>
 
-  </div>
+  <!-- Order Form -->
+  <section id="orderSection" class="p-6 hidden">
+    <h2 class="text-2xl font-bold mb-4">Get Started</h2>
+    <form id="orderForm" class="bg-[#1E1E1E] p-4 rounded">
+      <input name="email" type="email" placeholder="Your Email" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded" required>
+      <input name="domain" type="text" placeholder="Custom Domain (optional)" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded">
+      <textarea name="project" placeholder="Project Specifications" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded"></textarea>
+      <button type="submit" class="bg-[#00BFA6] px-4 py-2 rounded text-black font-bold w-full">Submit</button>
+    </form>
+  </section>
 
-  <p class="text-sm text-gray-500 mt-4 font-bold italic">
-    *All plans exclude domain name purchase. Customers must purchase their own domain. Unless default is selected.*
-  </p>
-</section>
+  <script>
+  const API_URL = "https://script.google.com/macros/s/AKfycbwWCb4OK7l9nGnN2ZzE3egRH6-8VRhNArW6BHg-7uPXwHrXgEtEkK7HowCxCOIkF8S3/exec"; // replace with your Apps Script URL
+  let selectedPlan = "";
 
-<!-- Order Form -->
-<section id="orderSection" class="p-6 hidden">
-  <h2 class="text-2xl font-bold mb-4">Get Started</h2>
-  <form id="orderForm" class="bg-[#1E1E1E] p-4 rounded">
-    <input name="email" type="email" placeholder="Your Email" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded" required>
-    <input name="domain" type="text" placeholder="Custom Domain (optional)" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded">
-    <textarea name="project" placeholder="Project Specifications" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded"></textarea>
-    <button type="submit" class="bg-[#00BFA6] px-4 py-2 rounded text-black font-bold w-full">Submit</button>
-  </form>
-</section>
+  const orderSection = document.getElementById('orderSection');
 
-<script>
-const API_URL = "https://script.google.com/macros/s/AKfycbwWCb4OK7l9nGnN2ZzE3egRH6-8VRhNArW6BHg-7uPXwHrXgEtEkK7HowCxCOIkF8S3/exec"; // replace with your Apps Script URL
-let selectedPlan = "";
-
-const orderSection = document.getElementById('orderSection');
-
-document.querySelectorAll('.select-btn').forEach((btn, index) => {
-  btn.addEventListener('click', () => {
-    const planName = btn.closest('.plan-card').querySelector('h3').innerText;
-    selectedPlan = planName;
-    orderSection.classList.remove('hidden');
-    orderSection.scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('.select-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const planName = btn.closest('.plan-card').querySelector('h3').innerText;
+      selectedPlan = planName;
+      orderSection.classList.remove('hidden');
+      orderSection.scrollIntoView({ behavior: 'smooth' });
+    });
   });
-});
 
-document.getElementById('orderForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const formData = Object.fromEntries(new FormData(e.target).entries());
-  formData.plan = selectedPlan;
+  document.getElementById('orderForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = Object.fromEntries(new FormData(e.target).entries());
+    formData.plan = selectedPlan;
 
-  fetch(API_URL, {
-    method: "POST",
-    mode: "no-cors", // temporary for Apps Script standalone setup
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData)
-  })
-  .then(() => {
-    alert("Submission successful!");
-    e.target.reset();
-    orderSection.classList.add('hidden');
-  })
-  .catch(err => {
-    alert("Error submitting form: " + err.message);
+    fetch(API_URL, {
+      method: "POST",
+      mode: "no-cors", // temporary for Apps Script standalone setup
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    })
+    .then(() => {
+      alert("Submission successful!");
+      e.target.reset();
+      orderSection.classList.add('hidden');
+    })
+    .catch(err => {
+      alert("Error submitting form: " + err.message);
+    });
   });
-});
-</script>
+  </script>
 
 </body>
 </html>
-
