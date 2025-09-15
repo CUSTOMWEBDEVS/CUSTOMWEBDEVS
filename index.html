@@ -1,346 +1,329 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Custom Website Development</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Tree Trimming Services & More LLC</title>
+<meta name="description" content="Insured, professional tree work. 16+ years experience. Call or text +1 (573) 915-3370." />
+<meta name="theme-color" content="#0b0d11" />
 <link rel="icon" href="images/weblogo.jpg" type="image/jpeg">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  body { background-color: #121212; color: white; }
-  .plan-card { transition: all 0.3s ease; cursor: pointer; }
-  .plan-card:hover { transform: scale(1.03); }
-  .hidden { display: none; }
 
-  /* ===== Pro Info Card Styling (integrated from your other design) ===== */
+<style>
   :root{
-    --line: rgba(255,255,255,.08);
-    --muted: #a7afc3;
+    --bg1:#0b0b12; --bg2:#141428;
+    --ac1:#8f63ff; --ac2:#f0cc6d;
+    --text:#e9ebf0; --muted:#a9afbd;
+    --line:rgba(255,255,255,.08);
+    --ring:#5e49ff55;
+    --shadow:0 18px 60px rgba(0,0,0,.45), 0 0 80px rgba(143,99,255,.12);
+    --card-bg:linear-gradient(180deg,#17182b,#101223);
+    --radius:18px;
   }
-  .info-wrap{ display:grid; gap:28px; max-width:1100px; margin:0 auto; }
-  .info-head{
-    display:flex; align-items:center; gap:10px;
-    font-weight:800; letter-spacing:.3px;
-    font-size:clamp(1.1rem, .95rem + .6vw, 1.4rem);
+
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    background:
+      radial-gradient(1200px 700px at 90% -10%, rgba(143,99,255,.20), transparent 60%),
+      radial-gradient(900px 600px at -10% 120%, rgba(240,204,109,.12), transparent 60%),
+      linear-gradient(180deg, var(--bg2), var(--bg1) 50%, #0a0a10 100%);
+    padding: clamp(16px, 2vw, 28px);
   }
-  .info-head::after{
-    content:""; flex:1; height:1px;
-    background:linear-gradient(90deg, var(--line), transparent);
+
+  .wrap{max-width:1100px; margin:0 auto; display:grid; gap:22px}
+
+  header{
+    display:flex; align-items:center; gap:12px;
   }
-  .feature-grid{
-    display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:14px;
+  .brand{
+    width:54px;height:54px;border-radius:14px; display:grid; place-items:center;
+    background:
+      linear-gradient(135deg, rgba(143,99,255,.28), rgba(240,204,109,.20)),
+      linear-gradient(135deg, #2a2746, #191a2e);
+    border:1px solid var(--line);
+    box-shadow:0 8px 26px rgba(143,99,255,.25);
+    font-weight:900; letter-spacing:.4px;
   }
-  @media (max-width: 800px){ .feature-grid{ grid-template-columns:1fr; } }
-  .feature{
-    display:flex; gap:12px; align-items:flex-start;
-    padding:16px; border:1px solid var(--line);
-    border-radius:14px;
-    background:linear-gradient(180deg, #1a1a2a, #121226);
-    box-shadow:0 6px 22px rgba(0,0,0,.25);
+  h1{margin:0;font-size:clamp(1.3rem,1.1rem + 1.6vw,2rem);letter-spacing:.2px}
+  .sub{color:var(--muted);margin-top:2px}
+
+  /* ===== Carousel (single image, cross-fade, no bleed) ===== */
+  .carousel{
+    position:relative; border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; background:#0e0f19; box-shadow:var(--shadow);
   }
-  .feature .ico{
-    width:40px; height:40px; border-radius:10px; flex:0 0 auto;
+  .carousel::before{
+    /* blurred fill behind the image for letterboxing */
+    content:""; position:absolute; inset:0; z-index:0;
+    background:var(--bg1);
+    filter:blur(18px) brightness(.9);
+    transform:scale(1.08);
+  }
+  .carousel img{
+    position:relative; z-index:1; display:block; width:100%;
+    height: clamp(260px, 38vw, 520px); /* responsive, consistent frame */
+    object-fit:contain; object-position:center;
+    transition:opacity .5s ease;
+  }
+  .carousel.fading img{ opacity:0; }
+
+  /* ===== Section Head ===== */
+  .sect-head{
+    display:flex; align-items:center; gap:12px; margin-top:6px;
+    font-weight:900; letter-spacing:.3px; font-size:clamp(1.05rem, .95rem + .6vw, 1.35rem);
+  }
+  .sect-head::after{
+    content:""; flex:1; height:1px; background:linear-gradient(90deg, var(--line), transparent);
+  }
+
+  /* ===== Feature Cards (Services) ===== */
+  .grid{
+    display:grid; gap:14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (max-width: 720px){ .grid{ grid-template-columns: 1fr; } }
+
+  .card{
+    display:flex; gap:14px; align-items:flex-start;
+    border:1px solid var(--line); border-radius:16px;
+    background:var(--card-bg); padding:16px;
+    box-shadow: var(--shadow);
+  }
+  .ico{
+    width:42px; height:42px; border-radius:12px; flex:0 0 auto;
     display:grid; place-items:center;
     background:linear-gradient(135deg, rgba(143,99,255,.18), rgba(240,204,109,.12));
     border:1px solid var(--line);
   }
-  .feature h4{ margin:0 0 2px; font-size:1rem; font-weight:800; letter-spacing:.2px; }
-  .feature p{ margin:0; font-size:.95rem; color:var(--muted); line-height:1.35; }
-  .info-card{
-    border:1px solid var(--line); border-radius:14px;
-    background:linear-gradient(180deg, #1a1a2a, #121226);
-    padding:16px; box-shadow:0 6px 22px rgba(0,0,0,.25);
+  .card h4{margin:2px 0 4px; font-size:1rem; letter-spacing:.2px}
+  .card p{margin:0; color:var(--muted); line-height:1.35}
+
+  /* ===== Info Blocks (Area / Hours / Contact) ===== */
+  .info-rows{
+    display:grid; gap:10px; margin-top:8px;
   }
-  .info-list{ display:grid; gap:10px; margin:0; }
-  .info-row{ display:flex; gap:10px; align-items:flex-start; }
-  .info-row .dot{
-    width:9px; height:9px; margin-top:6px; border-radius:50%;
+  .row{display:flex; gap:10px; align-items:flex-start}
+  .dot{
+    width:9px;height:9px;margin-top:7px;border-radius:50%;
     background:radial-gradient(circle at 30% 30%, #fff, #cfc7ff 60%, #8f63ff);
     flex:0 0 auto;
   }
-  .info-row .label{ color:var(--muted); font-size:.92rem; }
-  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:12px; }
-  .btn-solid{
+  .muted{color:var(--muted)}
+  .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:10px}
+  .btn{
     display:inline-flex; gap:10px; align-items:center;
-    padding:12px 16px; border-radius:12px;
-    border:1px solid var(--line);
-    background:linear-gradient(180deg, #1e233f, #181c36);
-    color:#e9ebf0; text-decoration:none; font-weight:800;
+    padding:12px 16px; border-radius:12px; text-decoration:none; color:var(--text); font-weight:800;
+    border:1px solid var(--line); background:linear-gradient(180deg, #1d2140, #161a36);
     box-shadow:0 8px 26px rgba(143,99,255,.18);
-    transition:transform .08s ease, box-shadow .15s ease;
+    transition:transform .08s ease, box-shadow .15s ease, border-color .15s ease;
   }
-  .btn-solid:hover{ transform:translateY(-1px); box-shadow:0 12px 34px rgba(143,99,255,.26); }
+  .btn:hover{ transform:translateY(-1px); border-color:rgba(143,99,255,.35); box-shadow:0 12px 34px rgba(143,99,255,.26); }
   .btn-ghost{
     display:inline-flex; gap:10px; align-items:center;
-    padding:12px 16px; border-radius:12px;
-    border:1px dashed rgba(255,255,255,.18);
-    color:#cfd3e3; text-decoration:none; font-weight:800;
+    padding:12px 16px; border-radius:12px; text-decoration:none; color:#cfd3e3;
+    border:1px dashed rgba(255,255,255,.2);
   }
+
+  footer{color:var(--muted); text-align:center; margin:14px auto 0}
+  footer a{color:#cfc7ff; text-decoration:none; border-bottom:1px dashed rgba(207,199,255,.4)}
+  footer a:hover{text-decoration:underline}
 </style>
 </head>
-<body class="font-sans">
-  <!-- Logo with manual positioning -->
-  <img src="images/weblogo.jpg" alt="Logo"
-       class="absolute"
-       style="top: 35px; left: 30px; height: 80px; width: auto;">
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">TT</div>
+      <div>
+        <h1>Tree Trimming Services &amp; More LLC</h1>
+        <div class="sub">Insured • 16+ years experience • Valles Mines, MO</div>
+      </div>
+    </header>
 
-  <!-- Hero -->
-  <section class="text-center py-12">
-    <h1 class="text-4xl font-bold mb-4">We Build Custom Websites</h1>
-    <p class="text-gray-300">Modern, responsive, and tailored to your needs</p>
-  </section>
+    <!-- ===== Carousel (no side bleed) ===== -->
+    <section class="carousel" aria-label="Work gallery">
+      <img id="carousel-img" src="images/1.JPG" alt="Recent job photo" loading="eager" decoding="async">
+    </section>
 
-  <!-- ===== New Professional Sections (added ABOVE your existing content) ===== -->
-  <main class="info-wrap px-6">
-    <!-- Services / What You Get -->
-    <h3 class="info-head">What You Get</h3>
-    <div class="feature-grid">
-      <article class="feature">
+    <!-- ===== Services ===== -->
+    <h3 class="sect-head">Services</h3>
+    <section class="grid" aria-label="Service offerings">
+      <article class="card">
         <div class="ico" aria-hidden="true">
-          <!-- Design -->
+          <!-- Scissors / Pruning -->
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <rect x="3" y="3" width="8" height="8" rx="2" stroke="#f0cc6d" stroke-width="2"/>
-            <rect x="13" y="3" width="8" height="8" rx="2" stroke="#cfc7ff" stroke-width="2"/>
-            <rect x="3" y="13" width="18" height="8" rx="2" stroke="#cfc7ff" stroke-width="2"/>
+            <path d="M9 5l6 6-6 6" stroke="#cfc7ff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="6" cy="6" r="2.2" stroke="#f0cc6d" stroke-width="1.6"/>
+            <circle cx="6" cy="18" r="2.2" stroke="#f0cc6d" stroke-width="1.6"/>
           </svg>
         </div>
         <div>
-          <h4>Custom Design & UX</h4>
-          <p>Clean, modern layouts built around your brand. Mobile-first, accessible, and fast.</p>
+          <h4>Pruning &amp; Crown Care</h4>
+          <p>Health-first trimming, deadwood removal, canopy shaping, and structural balance to protect trees and property.</p>
         </div>
       </article>
 
-      <article class="feature">
+      <article class="card">
         <div class="ico" aria-hidden="true">
-          <!-- Speed/SEO -->
+          <!-- Axe / Controlled removals -->
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M12 3a9 9 0 109 9" stroke="#cfc7ff" stroke-width="2"/>
-            <path d="M12 12l6-3" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 20l6-6m6-10l4 4-6 6-4-4 6-6z" stroke="#cfc7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div>
-          <h4>Performance & SEO</h4>
-          <p>Optimized assets, Lighthouse-friendly markup, and on-page SEO best practices.</p>
+          <h4>Controlled Removals</h4>
+          <p>Tight-space sectional takedowns with rigging and lowering—precision work where heavy equipment can’t go.</p>
         </div>
       </article>
 
-      <article class="feature">
+      <article class="card">
         <div class="ico" aria-hidden="true">
-          <!-- Hosting/SSL -->
+          <!-- Bolt / Storm -->
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <path d="M4 5h16v6H4zM4 13h16v6H4z" stroke="#cfc7ff" stroke-width="2"/>
-            <path d="M8 8h4M8 16h4" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+            <path d="M13 2L3 14h7l-1 8 11-12h-7l0-8z" fill="#cfc7ff" opacity=".85"/>
           </svg>
         </div>
         <div>
-          <h4>Hosting & SSL (optional)</h4>
-          <p>We can host it for you with HTTPS and monitoring—or hand off files to your provider.</p>
+          <h4>Storm Damage &amp; Hazard Cleanup</h4>
+          <p>Emergency response, hangers cleared, broken limbs secured, and debris hauled—safely and quickly.</p>
         </div>
       </article>
 
-      <article class="feature">
+      <article class="card">
         <div class="ico" aria-hidden="true">
-          <!-- Admin -->
+          <!-- Broom / Brush -->
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-            <circle cx="8" cy="8" r="3" stroke="#cfc7ff" stroke-width="2"/>
-            <path d="M3 21a5 5 0 0110 0" stroke="#cfc7ff" stroke-width="2"/>
-            <path d="M15 9h6M18 6v6" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+            <path d="M3 17c3 0 5 2 9 2s6-2 9-2" stroke="#f0cc6d" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 3l6 6" stroke="#cfc7ff" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6 21l12-12" stroke="#cfc7ff" stroke-width="2" stroke-linecap="round"/>
           </svg>
         </div>
         <div>
-          <h4>Admin & Integrations</h4>
-          <p>From simple static sites to live admin dashboards, Sheets/App Script, email, and more.</p>
+          <h4>Brush &amp; Haul-Away</h4>
+          <p>Clean work sites every time—chip, stack, or full removal. We leave your yard ready to enjoy.</p>
         </div>
       </article>
-    </div>
+    </section>
 
-    <!-- How We Work -->
-    <h3 class="info-head">How We Work</h3>
-    <div class="info-card">
-      <div class="info-list">
-        <div class="info-row">
+    <!-- ===== Service Area ===== -->
+    <h3 class="sect-head">Service Area</h3>
+    <section class="card" aria-label="Service area">
+      <div class="info-rows">
+        <div class="row">
           <span class="dot" aria-hidden="true"></span>
           <div>
-            <strong>Quick Discovery</strong>
-            <div class="label">We gather goals, content, and references to nail your look and structure.</div>
+            <strong>Based in Valles Mines, MO 63087</strong>
+            <div class="muted">Local, insured crew with 16+ years of experience.</div>
           </div>
         </div>
-        <div class="info-row">
+        <div class="row">
           <span class="dot" aria-hidden="true"></span>
           <div>
-            <strong>Design & Build</strong>
-            <div class="label">We ship a first pass fast, then refine with your feedback.</div>
-          </div>
-        </div>
-        <div class="info-row">
-          <span class="dot" aria-hidden="true"></span>
-          <div>
-            <strong>Launch & Support</strong>
-            <div class="label">We deploy (or hand off), verify speed/SEO, and stand by for tweaks.</div>
+            <strong>Nearby counties by request</strong>
+            <div class="muted">Tell us your location—we’ll confirm availability and travel.</div>
           </div>
         </div>
       </div>
-      <div class="cta-row">
-        <a class="btn-solid" href="#orderSection">
-          <!-- Arrow -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 5l7 7-7 7" stroke="#cfc7ff" stroke-width="1.8" stroke-linecap="round"/></svg>
-          Start Your Project
-        </a>
-        <a class="btn-ghost" href="mailto:contact@yourdomain.com">Email Questions</a>
-      </div>
-    </div>
+    </section>
 
-    <!-- Availability & Contact -->
-    <h3 class="info-head">Availability & Contact</h3>
-    <div class="info-card">
-      <div class="info-list">
-        <div class="info-row">
+    <!-- ===== Hours & Contact ===== -->
+    <h3 class="sect-head">Hours &amp; Contact</h3>
+    <section class="card" aria-label="Hours and contact">
+      <div class="info-rows">
+        <div class="row">
           <span class="dot" aria-hidden="true"></span>
-          <div><strong>Mon–Sat</strong> · 9:00–6:00</div>
+          <div><strong>Mon–Sat</strong> · 7:00–6:00</div>
         </div>
-        <div class="info-row">
+        <div class="row">
           <span class="dot" aria-hidden="true"></span>
           <div><strong>Sun</strong> · by appointment</div>
         </div>
-        <div class="info-row">
+        <div class="row">
           <span class="dot" aria-hidden="true"></span>
           <div><strong>Fastest reply:</strong> call or text
-            <a href="tel:+15739153370" class="underline decoration-dashed decoration-gray-400">+1 (573) 915-3370</a>
+            <a href="tel:+15739153370" style="color:#cfc7ff;text-decoration:none;border-bottom:1px dashed rgba(207,199,255,.4)">+1 (573) 915-3370</a>
           </div>
         </div>
       </div>
       <div class="cta-row">
-        <a class="btn-solid" href="tel:+15739153370">
-          <!-- Phone icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5c4 8 8 12 16 16l2-4-5-3-3 2c-2-1-4-3-6-6l2-3-3-5-3 3z" stroke="#cfc7ff" stroke-width="1.6"/></svg>
+        <a class="btn" href="tel:+15739153370" aria-label="Call now">
+          <!-- phone -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 5c4 8 8 12 16 16l2-4-5-3-3 2c-2-1-4-3-6-6l2-3-3-5-3 3z" stroke="#cfc7ff" stroke-width="1.6"/>
+          </svg>
           Call Now
         </a>
         <a class="btn-ghost" href="sms:+15739153370">Text Us</a>
       </div>
-    </div>
-  </main>
-  <!-- ===== End New Sections ===== -->
+    </section>
 
-  <!-- Live Example -->
-  <section class="p-6">
-    <h2 class="text-2xl font-bold mb-4">Customer Satisfaction Example</h2>
-    <!-- Note: some sites block iframes with X-Frame-Options -->
-    <iframe src="https://voices.band/" class="w-full h-[750px] rounded border border-gray-700"></iframe>
-  </section>
-
-  <!-- Pricing Plans -->
-  <section class="p-6">
-    <h2 class="text-2xl font-bold mb-4">Plans & Pricing</h2>
-    <div id="plans" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-
-      <!-- No Hosting -->
-      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-        <h3 class="text-lg font-bold">No Hosting</h3>
-        <p class="text-2xl text-[#00BFA6] font-bold">$299</p>
-        <p class="text-gray-400">We deliver files, you host anywhere.</p>
-        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-          <li>Custom Design</li>
-          <li>Files Provided</li>
-          <li>Fast Delivery</li>
-        </ul>
-        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
-      </div>
-
-      <!-- Static Config -->
-      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-        <h3 class="text-lg font-bold">Static Config</h3>
-        <p class="text-2xl text-[#00BFA6] font-bold">$349</p>
-        <p class="text-gray-400">Fixed content, no admin panel.</p>
-        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-          <li>Custom Design</li>
-          <li>Fast Loading</li>
-          <li>No Backend Editing</li>
-        </ul>
-        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
-      </div>
-
-      <!-- Hosting Included -->
-      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-        <h3 class="text-lg font-bold">Hosting Included</h3>
-        <p class="text-2xl text-[#00BFA6] font-bold">$399</p>
-        <p class="text-gray-400">Full website + managed hosting.</p>
-        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-          <li>Custom Design</li>
-          <li>Free SSL</li>
-          <li>1 Year Hosting</li>
-        </ul>
-        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
-      </div>
-
-      <!-- Fully Dynamic -->
-      <div class="plan-card bg-[#1E1E1E] p-4 rounded">
-        <h3 class="text-lg font-bold">Fully Dynamic</h3>
-        <p class="text-2xl text-[#00BFA6] font-bold">$499</p>
-        <p class="text-gray-400">Admin page to edit content live.</p>
-        <ul class="list-disc list-inside text-sm text-gray-300 mt-2">
-          <li>Custom Design</li>
-          <li>Hosting</li>
-          <li>Admin Page For Editing</li>
-          <li>Full Support</li>
-          <li>Three Additions After Completion</li>
-        </ul>
-        <button class="select-btn mt-2 bg-[#00BFA6] text-black px-4 py-2 rounded w-full">Select Plan</button>
-      </div>
-
-    </div>
-
-    <p class="text-sm text-gray-500 mt-4 font-bold italic">
-      *All plans exclude domain name purchase. Customers must purchase their own domain. Unless default is selected.*
-    </p>
-  </section>
-
-  <!-- Order Form -->
-  <section id="orderSection" class="p-6 hidden">
-    <h2 class="text-2xl font-bold mb-4">Get Started</h2>
-    <form id="orderForm" class="bg-[#1E1E1E] p-4 rounded">
-      <input name="email" type="email" placeholder="Your Email" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded" required>
-      <input name="domain" type="text" placeholder="Custom Domain (optional)" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded">
-      <textarea name="project" placeholder="Project Specifications" class="w-full p-2 mb-2 bg-[#121212] border border-gray-700 rounded"></textarea>
-      <button type="submit" class="bg-[#00BFA6] px-4 py-2 rounded text-black font-bold w-full">Submit</button>
-    </form>
-  </section>
+    <footer>
+      &copy; <span id="yr"></span> Tree Trimming Services &amp; More LLC • <a href="https://www.facebook.com/treetrimmingservicesandmoreLLC2015" target="_blank" rel="noopener noreferrer">Facebook</a>
+    </footer>
+  </div>
 
   <script>
-  const API_URL = "https://script.google.com/macros/s/AKfycbwWCb4OK7l9nGnN2ZzE3egRH6-8VRhNArW6BHg-7uPXwHrXgEtEkK7HowCxCOIkF8S3/exec"; // replace with your Apps Script URL
-  let selectedPlan = "";
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
 
-  const orderSection = document.getElementById('orderSection');
+    // ===== Simple, clean carousel (no side bleed) =====
+    const carouselImages = [
+      'images/1.JPG',
+      'images/2.JPG',
+      'images/3.JPG',
+      'images/4.JPG',
+      'images/5.JPG',
+      'images/6.JPG',
+      'images/7.JPG',
+      'images/8.JPG',
+      'images/9.JPG',
+      'images/10.JPG'
+    ];
+    let currentIdx = 0;
+    const imgEl = document.getElementById('carousel-img');
+    const carouselEl = imgEl.parentElement;
 
-  document.querySelectorAll('.select-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const planName = btn.closest('.plan-card').querySelector('h3').innerText;
-      selectedPlan = planName;
-      orderSection.classList.remove('hidden');
-      orderSection.scrollIntoView({ behavior: 'smooth' });
+    function nextImage(){
+      carouselEl.classList.add('fading');
+      // wait for fade-out, then swap, then fade-in
+      setTimeout(()=>{
+        currentIdx = (currentIdx + 1) % carouselImages.length;
+        imgEl.src = carouselImages[currentIdx];
+        imgEl.alt = 'Recent job photo ' + (currentIdx + 1);
+        requestAnimationFrame(()=>{ // ensure paint
+          carouselEl.classList.remove('fading');
+        });
+      }, 350);
+    }
+
+    let rotateTimer = setInterval(nextImage, 4000);
+
+    // Pause on hover/focus (desktop & a11y)
+    carouselEl.addEventListener('mouseenter', ()=>clearInterval(rotateTimer));
+    carouselEl.addEventListener('mouseleave', ()=>rotateTimer = setInterval(nextImage, 4000));
+    carouselEl.addEventListener('focusin', ()=>clearInterval(rotateTimer));
+    carouselEl.addEventListener('focusout', ()=>rotateTimer = setInterval(nextImage, 4000));
+
+    // Optional: swipe support (mobile)
+    let startX = null;
+    carouselEl.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    carouselEl.addEventListener('touchend', e => {
+      if(startX==null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if(Math.abs(dx) > 30){
+        // go next on left swipe, previous on right swipe
+        carouselEl.classList.add('fading');
+        setTimeout(()=>{
+          if(dx < 0){ currentIdx = (currentIdx + 1) % carouselImages.length; }
+          else { currentIdx = (currentIdx - 1 + carouselImages.length) % carouselImages.length; }
+          imgEl.src = carouselImages[currentIdx];
+          imgEl.alt = 'Recent job photo ' + (currentIdx + 1);
+          requestAnimationFrame(()=>{ carouselEl.classList.remove('fading'); });
+        }, 350);
+      }
+      startX = null;
     });
-  });
-
-  document.getElementById('orderForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target).entries());
-    formData.plan = selectedPlan;
-
-    fetch(API_URL, {
-      method: "POST",
-      mode: "no-cors", // temporary for Apps Script standalone setup
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    })
-    .then(() => {
-      alert("Submission successful!");
-      e.target.reset();
-      orderSection.classList.add('hidden');
-    })
-    .catch(err => {
-      alert("Error submitting form: " + err.message);
-    });
-  });
   </script>
-
 </body>
 </html>
